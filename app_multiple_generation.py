@@ -9,7 +9,7 @@ import requests
 ##################################
 # Helper Functions
 ##################################
-def generate_text(prompt, temperature=0.8, top_p=0.8, max_length=100):
+def generate_text(prompt, temperature=0.9, top_p=0.9, max_length=150):
     # Replace with your actual Hugging Face token
     headers = {"Authorization": "Bearer hf_XXXXXXXXXXXXXXXXXx"}
     API_URL = "https://api-inference.huggingface.co/models/meta-llama/Llama-3.2-1B"
