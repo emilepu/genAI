@@ -1,5 +1,3 @@
-
-
 # api - single generation
 import streamlit as st
 import requests
@@ -7,7 +5,7 @@ import requests
 ##################################
 # Helper Functions
 ##################################
-def generate_text(prompt, temperature=0.8, top_p=0.8, max_length=300):
+def generate_text(prompt, temperature=0.9, top_p=0.8, max_length=400):
     # Replace with your actual Hugging Face token
     headers = {"Authorization": "Bearer hf_XXXXXXXXXX"}
     API_URL = "https://api-inference.huggingface.co/models/meta-llama/Llama-3.2-1B"
@@ -55,14 +53,7 @@ story_idea = st.text_input("Enter the main idea or theme of the story (e.g., exp
 if st.button("Generate Story"):
     if genre and characters and story_idea:
         # Single prompt to generate the entire story
-        prompt = (
-            f"You are a writer. Write a {genre} story about {characters} "
-            f"with the main idea: {story_idea}. "
-            f"Start by describing the characters, the setting, and the journey they will go on. "
-            f"Then introduce a conflict or challenge they must face, and finally, resolve the conflict and conclude the story. "
-            f"Do this in a seamless and cohesive narrative without extra remarks or questions. "
-            f"Write the entire story:"
-        )
+        prompt = ((f"You are a writer. Write a {genre} story about {characters} with the main idea: {story_idea}. Start by describing the characters, the setting, and the journey they will go on. Then introduce a conflict or challenge they must face, and finally, resolve the conflict and conclude the story. Write the entire story:")
 
         # Generate the story in one go
         full_story = generate_text(prompt)
@@ -95,13 +86,7 @@ if st.session_state.show_refine_input:
 
     if st.button("Apply Feedback"):
         # Build a new prompt that includes user feedback
-        refine_prompt = (
-            "You are a writer. Here's the story so far:\n\n"
-            f"{st.session_state.full_story}\n\n"
-            "Refine or rewrite the story based on the following feedback (without adding unrelated comments or questions): "
-            f"{feedback}\n\n"
-            "Refined story:"
-        )
+        refine_prompt = (f"You are a writer. Here's the story so far:\n\n {st.session_state.full_story}\n\n Refine or rewrite the story based on the following feedback (without adding unrelated comments or questions): {feedback}\n\n Refined story:")
 
         # Generate the refined story
         refined_story = generate_text(refine_prompt)
