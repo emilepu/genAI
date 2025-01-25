@@ -131,7 +131,7 @@ if st.session_state.show_refine_input:
         )
 
         # Generate the refined story
-        refined_story = generate_text(refine_prompt)
+        refined_story = generate_text(refine_prompt,max_length=500)
         refined_story = trim_at_eos(refined_story, eos_token='.')
 
         st.subheader("Refined Story:")
